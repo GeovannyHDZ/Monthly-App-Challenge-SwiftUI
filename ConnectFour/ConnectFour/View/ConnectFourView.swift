@@ -9,24 +9,18 @@ import SwiftUI
 
 struct ConnectFourView: View {
     var body: some View {
-        ZStack {
-            Board()
-            
-            
-            
-        }
+        Board(conn4VM: Conn4VM()).padding()
     }
 }
 
 struct Board: View{
+    @ObservedObject var conn4VM: Conn4VM
     var body: some View{
         HStack {
-            ForEach (0..<7){ _ in
+            ForEach (0..<7){ col in
                 VStack {
-                    ForEach (0..<6) { _ in
-                            ZStack {
-                                Circle().stroke()
-                            }
+                    ForEach (0..<6) { i in
+                        Cell(piece: conn4VM.piencesAt(col: col, row: 5 - i))
                     }
                 }
             }
@@ -35,6 +29,23 @@ struct Board: View{
     }
 }
 
+struct Cell: View{
+    var piece: Conn4.Piece?
+    
+    var body: some View{
+        ZStack{
+            if let piece = piece {
+                if piece.player == .red{
+                    Circle().fill(Color.red)
+                } else{
+                    Circle().fill(Color.yellow)
+                }
+            }
+            Circle().stroke(lineWidth: 2)
+        }
+        
+    }
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ConnectFourView()
@@ -56,21 +67,21 @@ struct ContentView_Previews: PreviewProvider {
 //
 //
 //
-//// Create an Struct for create an shape
-////struct Board: Shape{
-////    func path(in rect: CGRect) -> Path {
-////        var path = Path()
-////        // Horizontal Lines
-////        for row in 0..<6{
-////            path.move(to: CGPoint(x: 20, y: 30 + row * 20))
-////            path.addLine(to: CGPoint(x: 140, y: 30 + row * 20))
-////        }
-////
-////        // Vertical Lines
-////        for colum in 0..<7{
-////            path.move(to: CGPoint(x: 20 + colum * 20, y: 30))
-////            path.addLine(to: CGPoint(x: 20 + colum * 20, y: 30 + 5 * 20))
-////        }
-////        return path
-////    }
-////}
+// Create an Struct for create an shape
+//struct Board: Shape{
+//    func path(in rect: CGRect) -> Path {
+//        var path = Path()
+//        // Horizontal Lines
+//        for row in 0..<6{
+//            path.move(to: CGPoint(x: 20, y: 30 + row * 20))
+//            path.addLine(to: CGPoint(x: 140, y: 30 + row * 20))
+//        }
+//
+//        // Vertical Lines
+//        for colum in 0..<7{
+//            path.move(to: CGPoint(x: 20 + colum * 20, y: 30))
+//            path.addLine(to: CGPoint(x: 20 + colum * 20, y: 30 + 5 * 20))
+//        }
+//        return path
+//    }
+//}
