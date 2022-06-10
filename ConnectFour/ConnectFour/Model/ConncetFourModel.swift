@@ -8,9 +8,11 @@
 import Foundation
 
 struct Conn4 {
-    private var piecesBox: Set<Piece> = [Piece(col: 0, row: 0, player: .yellow)]
+    private var piecesBox: Set<Piece> = []
     
-    func dropAt(col: Int){  }
+    mutating func dropAt(col: Int){
+        piecesBox.insert(Piece(col: col, row: 0, player: .red))
+    }
     
     func piencesAt(col: Int, row: Int) -> Piece? {
         for piece in piecesBox {
