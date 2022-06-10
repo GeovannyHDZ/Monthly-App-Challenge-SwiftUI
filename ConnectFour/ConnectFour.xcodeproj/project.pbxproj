@@ -12,6 +12,7 @@
 		9A4D8028285393F2001AACB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4D8027285393F2001AACB5 /* Assets.xcassets */; };
 		9A4D802B285393F2001AACB5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4D802A285393F2001AACB5 /* Preview Assets.xcassets */; };
 		9A4D80342853BE7E001AACB5 /* ConncetFourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4D80332853BE7E001AACB5 /* ConncetFourModel.swift */; };
+		9A4D80372853BF4F001AACB5 /* ConnectFourVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4D80362853BF4F001AACB5 /* ConnectFourVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		9A4D8027285393F2001AACB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A4D802A285393F2001AACB5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9A4D80332853BE7E001AACB5 /* ConncetFourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConncetFourModel.swift; sourceTree = "<group>"; };
+		9A4D80362853BF4F001AACB5 /* ConnectFourVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectFourVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		9A4D8022285393EC001AACB5 /* ConnectFour */ = {
 			isa = PBXGroup;
 			children = (
+				9A4D80352853BF34001AACB5 /* ViewModel */,
 				9A4D80322853BE63001AACB5 /* Model */,
 				9A4D80312853BDCE001AACB5 /* View */,
 				9A4D8023285393EC001AACB5 /* ConnectFourApp.swift */,
@@ -84,6 +87,14 @@
 				9A4D80332853BE7E001AACB5 /* ConncetFourModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9A4D80352853BF34001AACB5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9A4D80362853BF4F001AACB5 /* ConnectFourVM.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 				9A4D80342853BE7E001AACB5 /* ConncetFourModel.swift in Sources */,
 				9A4D8026285393EC001AACB5 /* ConnectFourView.swift in Sources */,
 				9A4D8024285393EC001AACB5 /* ConnectFourApp.swift in Sources */,
+				9A4D80372853BF4F001AACB5 /* ConnectFourVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
