@@ -22,6 +22,8 @@ struct Board: View{
                     ForEach (0..<6) { i in
                         Cell(piece: conn4VM.piencesAt(col: col, row: 5 - i))
                     }
+                }.onTapGesture {
+                    conn4VM.dropAt(col: col)
                 }
             }
             
