@@ -9,9 +9,12 @@ import Foundation
 
 struct Conn4 {
     private var piecesBox: Set<Piece> = []
+    private var whoseTurn: Player = .red
     
     mutating func dropAt(col: Int){
-        piecesBox.insert(Piece(col: col, row: 0, player: .red))
+        let numPiecesAtCol = numPieces(at: col)
+        piecesBox.insert(Piece(col: col, row: numPiecesAtCol, player: whoseTurn))
+        whoseTurn = whoseTurn == .red ? .yellow : .red
     }
     
     func piencesAt(col: Int, row: Int) -> Piece? {
@@ -21,6 +24,19 @@ struct Conn4 {
             }
         }
         return nil
+    }
+    func numPieces(at col: Int) -> Int {
+        var count = 0
+        for piece in piecesBox {
+            if piece.col == col {
+                count += 1
+            }
+        }
+        return count
+    }
+    mutating func reset(){
+        piecesBox.removeAll()
+        whoseTurn = .red
     }
     
     enum Player {

@@ -9,24 +9,31 @@ import SwiftUI
 
 struct ConnectFourView: View {
     var body: some View {
-        Board(conn4VM: Conn4VM()).padding()
+        VStack{
+            Board(conn4VM: Conn4VM()).padding()
+           
+        }
+        
     }
 }
 
 struct Board: View{
     @ObservedObject var conn4VM: Conn4VM
     var body: some View{
-        HStack {
-            ForEach (0..<7){ col in
-                VStack {
-                    ForEach (0..<6) { i in
-                        Cell(piece: conn4VM.piencesAt(col: col, row: 5 - i))
-                    }
-                }.onTapGesture {
-                    conn4VM.dropAt(col: col)
+        VStack {
+            HStack {
+                ForEach (0..<7){ col in
+                    VStack {
+                        ForEach (0..<6) { i in
+                            Cell(piece: conn4VM.piencesAt(col: col, row: 5 - i))
+                        }
+                    }.contentShape(Rectangle())
+                        .onTapGesture {
+                            conn4VM.dropAt(col: col)
+                        }
                 }
             }
-            
+            Button("Reset") {  conn4VM.reset()  }
         }
     }
 }
@@ -48,6 +55,7 @@ struct Cell: View{
         
     }
 }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ConnectFourView()
