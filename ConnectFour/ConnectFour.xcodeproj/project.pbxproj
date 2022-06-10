@@ -55,9 +55,9 @@
 		9A4D8022285393EC001AACB5 /* ConnectFour */ = {
 			isa = PBXGroup;
 			children = (
-				9A4D80352853BF34001AACB5 /* ViewModel */,
 				9A4D80322853BE63001AACB5 /* Model */,
 				9A4D80312853BDCE001AACB5 /* View */,
+				9A4D80352853BF34001AACB5 /* ViewModel */,
 				9A4D8023285393EC001AACB5 /* ConnectFourApp.swift */,
 				9A4D8027285393F2001AACB5 /* Assets.xcassets */,
 				9A4D8029285393F2001AACB5 /* Preview Content */,
