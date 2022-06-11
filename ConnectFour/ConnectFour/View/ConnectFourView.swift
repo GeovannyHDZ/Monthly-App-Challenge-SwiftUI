@@ -10,6 +10,7 @@ import SwiftUI
 struct ConnectFourView: View {
     var body: some View {
         VStack{
+            ScoreBoard()
             Board(conn4VM: Conn4VM()).padding()
            
         }
@@ -34,6 +35,7 @@ struct Board: View{
                 }
             }
             Button("Reset") {  conn4VM.reset()  }
+            .font(.title)
         }
     }
 }
@@ -53,6 +55,31 @@ struct Cell: View{
             Circle().stroke(lineWidth: 2)
         }
         
+    }
+}
+
+struct ScoreBoard: View{
+    var body: some View{
+        HStack{
+            VStack {
+                Text("Red")
+                    .font(.title)
+                    .fontWeight(.bold)
+                Text("0")
+                    .fontWeight(.bold)
+            }
+            Image(systemName: "dice.fill").foregroundColor(Color.red)
+            Spacer()
+            Image(systemName: "dice.fill").foregroundColor(Color.yellow)
+            VStack {
+                Text("Yellow")
+                    .font(.title)
+                    .fontWeight(.bold)
+                Text("0")
+                    .fontWeight(.bold)
+            }
+            
+        }.padding()
     }
 }
 
