@@ -21,4 +21,6 @@ class Conn4VM: ObservableObject{
     func dropAt(col: Int) {
         game.dropAt(col: col)
     }
+    
+    
 }
