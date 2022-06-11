@@ -14,21 +14,96 @@ struct Conn4 {
     mutating func dropAt(col: Int){
         let numPiecesAtCol = numPieces(at: col)
         piecesBox.insert(Piece(col: col, row: numPiecesAtCol, player: whoseTurn))
-        whoseTurn = whoseTurn == .red ? .yellow : .red
         
-        if verticalCount(col: col, row: numPiecesAtCol, player: whoseTurn) == 4{
-            print("Game won by \(whoseTurn)")
+        if verticalCount(col: col, row: numPiecesAtCol, player: whoseTurn) == 4 {
+            print("game won vertically by player: \(whoseTurn)")
+        } else if leftCount(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCount(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
+            print("game won horizontally by player: \(whoseTurn)")
+        } else if leftCountBL2TR(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCountBL2TR(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
+            print("game won diagonally BL-TR by player: \(whoseTurn)")
+        } else if leftCountTL2BR(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCountTL2BR(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
+            print("game won diagonally TL-BR by player: \(whoseTurn)")
         }
+        
+        whoseTurn = whoseTurn == .red ? .yellow : .red
     }
-    func verticalCount(col: Int, row: Int, player: Player) -> Int{
-        if piencesAt(col: col, row: row)?.player != player{
+    
+    /*
+     bottom left to top right
+     */
+    func leftCountBL2TR(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
+            return 0
+        }
+        if col == 0 || row == 0 {
+            return 1
+        }
+        return 1 + leftCountBL2TR(col: col - 1, row: row - 1, player: player)
+    }
+    
+    func rightCountBL2TR(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
+            return 0
+        }
+        if col == 6 || row == 5 {
+            return 1
+        }
+        return 1 + rightCountBL2TR(col: col + 1, row: row + 1, player: player)
+    }
+    
+    /*
+     top left to bottom right
+     */
+    func leftCountTL2BR(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
+            return 0
+        }
+        if col == 0 || row == 5 {
+            return 1
+        }
+        return 1 + leftCountTL2BR(col: col - 1, row: row + 1, player: player)
+    }
+    
+    func rightCountTL2BR(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
+            return 0
+        }
+        if col == 6 || row == 0 {
+            return 1
+        }
+        return 1 + rightCountTL2BR(col: col + 1, row: row - 1, player: player)
+    }
+    
+    func leftCount(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
+            return 0
+        }
+        if col == 0 {
+            return 1
+        }
+        return 1 + leftCount(col: col - 1, row: row, player: player)
+    }
+    
+    func rightCount(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
+            return 0
+        }
+        if col == 6 {
+            return 1
+        }
+        return 1 + rightCount(col: col + 1, row: row, player: player)
+    }
+    
+    func verticalCount(col: Int, row: Int, player: Player) -> Int {
+        if piencesAt(col: col, row: row)?.player != player {
             return 0
         }
         if row == 0 {
-            return 0
+            return 1
         }
         return 1 + verticalCount(col: col, row: row - 1, player: player)
     }
+    
     
     func piencesAt(col: Int, row: Int) -> Piece? {
         for piece in piecesBox {
@@ -47,6 +122,7 @@ struct Conn4 {
         }
         return count
     }
+    
     mutating func reset(){
         piecesBox.removeAll()
         whoseTurn = .red
@@ -55,6 +131,10 @@ struct Conn4 {
     enum Player {
         case red
         case yellow
+        
+        var isRed: Bool{
+            self == .red
+        }
     }
     
     struct Piece : Hashable {
