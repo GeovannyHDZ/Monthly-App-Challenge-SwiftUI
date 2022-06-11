@@ -10,9 +10,8 @@ import SwiftUI
 struct ConnectFourView: View {
     var body: some View {
         VStack{
-            ScoreBoard()
-            Board(conn4VM: Conn4VM()).padding()
-           
+            Board(conn4VM: Conn4VM())
+                .padding()
         }
         
     }
@@ -22,6 +21,7 @@ struct Board: View{
     @ObservedObject var conn4VM: Conn4VM
     var body: some View{
         VStack {
+            ScoreBoard(Score: Conn4.Score(red: conn4VM., yellow: <#T##Int#>))
             HStack {
                 ForEach (0..<7){ col in
                     VStack {
@@ -34,15 +34,14 @@ struct Board: View{
                         }
                 }
             }
-            Button("Reset") {  conn4VM.reset()  }
-            .font(.title)
         }
+        Button("Reset") {  conn4VM.reset()  }
+        .font(.title)
     }
 }
 
 struct Cell: View{
     var piece: Conn4.Piece?
-    
     var body: some View{
         ZStack{
             if let piece = piece {
@@ -59,33 +58,43 @@ struct Cell: View{
 }
 
 struct ScoreBoard: View{
+    var Score : Conn4.Score
     var body: some View{
-        HStack{
-            VStack {
-                Text("Red")
-                    .font(.title)
-                    .fontWeight(.bold)
-                Text("0")
-                    .fontWeight(.bold)
+        VStack {
+            HStack{
+                VStack {
+                    Text("Red")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Text(String(Score.red))
+                        .fontWeight(.bold)
+                }
+                Image(systemName: "dice.fill").foregroundColor(Color.red)
+                Spacer()
+                Image(systemName: "dice.fill").foregroundColor(Color.yellow)
+                VStack {
+                    Text("Yellow")
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Text(String(Score.yellow))
+                        .fontWeight(.bold)
+                }
+                
+            }.padding()
+            HStack {
+                Text("Turn")
+                    .font(.headline)
+                .fontWeight(.light)
+                Image(systemName: "circle.circle").foregroundColor(.green)
             }
-            Image(systemName: "dice.fill").foregroundColor(Color.red)
-            Spacer()
-            Image(systemName: "dice.fill").foregroundColor(Color.yellow)
-            VStack {
-                Text("Yellow")
-                    .font(.title)
-                    .fontWeight(.bold)
-                Text("0")
-                    .fontWeight(.bold)
-            }
-            
-        }.padding()
+               
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ConnectFourView()
+        ScoreBoard(Score: Conn4.Score(red: 0, yellow: 9))
     }
 }
 
