@@ -10,6 +10,9 @@ import Foundation
 struct Conn4 {
     private var piecesBox: Set<Piece> = []
     private var whoseTurn: Player = .red
+    var winningCountRed: Int = 0
+    var winningCountYellow: Int = 0
+    
     
     mutating func dropAt(col: Int){
         let numPiecesAtCol = numPieces(at: col)
@@ -17,16 +20,26 @@ struct Conn4 {
         
         if verticalCount(col: col, row: numPiecesAtCol, player: whoseTurn) == 4 {
             print("game won vertically by player: \(whoseTurn)")
+            sumScore()
         } else if leftCount(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCount(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
             print("game won horizontally by player: \(whoseTurn)")
+            sumScore()
         } else if leftCountBL2TR(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCountBL2TR(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
             print("game won diagonally BL-TR by player: \(whoseTurn)")
+            sumScore()
         } else if leftCountTL2BR(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCountTL2BR(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
             print("game won diagonally TL-BR by player: \(whoseTurn)")
+            sumScore()
         }
         
         whoseTurn = whoseTurn == .red ? .yellow : .red
     }
+    
+    mutating func sumScore(){
+        if whoseTurn == .red{  winningCountRed += 1  } else {  winningCountYellow += 1  }
+    }
+    
+    
     
     /*
      bottom left to top right
@@ -142,4 +155,7 @@ struct Conn4 {
         var row : Int
         var player : Player
     }
+    
+    
+    
 }
