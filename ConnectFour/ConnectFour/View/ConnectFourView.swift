@@ -58,6 +58,7 @@ struct Cell: View{
 }
 
 struct ScoreBoard: View{
+    var score = Conn4VM()
     var body: some View{
         VStack {
             HStack{
@@ -65,7 +66,7 @@ struct ScoreBoard: View{
                     Text("Red")
                         .font(.title)
                         .fontWeight(.bold)
-                    Text("5")
+                    Text(String(score.game.winningCountRed))
                         .fontWeight(.bold)
                 }
                 Image(systemName: "dice.fill").foregroundColor(Color.red)
@@ -75,7 +76,7 @@ struct ScoreBoard: View{
                     Text("Yellow")
                         .font(.title)
                         .fontWeight(.bold)
-                    Text("53")
+                    Text(String(score.game.winningCountYellow))
                         .fontWeight(.bold)
                 }
                 
@@ -93,7 +94,7 @@ struct ScoreBoard: View{
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreBoard()
+        ConnectFourView()
     }
 }
 
