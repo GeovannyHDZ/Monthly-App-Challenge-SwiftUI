@@ -10,8 +10,8 @@ import Foundation
 struct Conn4 {
     private var piecesBox: Set<Piece> = []
     private var whoseTurn: Player = .red
-    var winningCountRed: Int = 0
-    var winningCountYellow: Int = 0
+    var winningCountRed: Int = 2
+    var winningCountYellow: Int = 3
     
     
     mutating func dropAt(col: Int){
@@ -21,6 +21,7 @@ struct Conn4 {
         if verticalCount(col: col, row: numPiecesAtCol, player: whoseTurn) == 4 {
             print("game won vertically by player: \(whoseTurn)")
             sumScore()
+            print(winningCountRed); print(winningCountYellow)
         } else if leftCount(col: col, row: numPiecesAtCol, player: whoseTurn) + rightCount(col: col, row: numPiecesAtCol, player: whoseTurn) - 1 == 4 {
             print("game won horizontally by player: \(whoseTurn)")
             sumScore()
@@ -139,6 +140,8 @@ struct Conn4 {
     mutating func reset(){
         piecesBox.removeAll()
         whoseTurn = .red
+        winningCountRed = 0
+        winningCountYellow = 0
     }
     
     enum Player {
