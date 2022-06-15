@@ -21,7 +21,7 @@ struct Board: View{
     @ObservedObject var conn4VM: Conn4VM
     var body: some View{
         VStack {
-            ScoreBoard(Score: Conn4.Score(red: conn4VM., yellow: <#T##Int#>))
+            ScoreBoard()
             HStack {
                 ForEach (0..<7){ col in
                     VStack {
@@ -58,7 +58,6 @@ struct Cell: View{
 }
 
 struct ScoreBoard: View{
-    var Score : Conn4.Score
     var body: some View{
         VStack {
             HStack{
@@ -66,7 +65,7 @@ struct ScoreBoard: View{
                     Text("Red")
                         .font(.title)
                         .fontWeight(.bold)
-                    Text(String(Score.red))
+                    Text("5")
                         .fontWeight(.bold)
                 }
                 Image(systemName: "dice.fill").foregroundColor(Color.red)
@@ -76,7 +75,7 @@ struct ScoreBoard: View{
                     Text("Yellow")
                         .font(.title)
                         .fontWeight(.bold)
-                    Text(String(Score.yellow))
+                    Text("53")
                         .fontWeight(.bold)
                 }
                 
@@ -94,7 +93,7 @@ struct ScoreBoard: View{
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreBoard(Score: Conn4.Score(red: 0, yellow: 9))
+        ScoreBoard()
     }
 }
 
